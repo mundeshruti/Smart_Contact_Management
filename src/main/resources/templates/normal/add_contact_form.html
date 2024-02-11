@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.thymeleaf.org" th:replace="normal/base::Layout(~{::section})">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+
+	<title>Base page</title>
+</head>
+
+<body>
+	<section>
+		<div class="card mr-5 ml-4">
+			<div class="card-body">
+				<h2 class="text-center"> Add Contact </h2>
+				<div class="container-fluid mt-1">
+					<div class="row">
+						
+						<div class="col-md-8 offset-md-2">
+							
+							<form action="#" th.object="${contact}" enctype="multipart/form-data" method="post"
+								th:action="@{/user/process-contact}" class="mt-2">
+							<div th:if="${session.message}" class="container">
+									<div th:classappend="${'alert-'+session.message.Type}"
+										class="alert alert-success text-center" role="alert">
+										<span th:text="${session.message.content}"></span>
+
+									</div>
+									<!--
+									<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+
+-->
+								</div>
+
+
+								<!-- first name -->
+
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<i class="fa fa-plus"></i>
+										</div>
+									</div>
+									<input type="text" id="firstName" name="name" placeholder="Enter Name here"
+										class="form-control" required />
+								</div>
+
+								<!-- second name -->
+
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<i class="fas fa-user-alt"></i>
+										</div>
+									</div>
+									<input type="text" id="secondName" name="secondName"
+										placeholder="Enter Nick Name here" class="form-control" required />
+								</div>
+
+								<!-- Phone -->
+
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<i class="fa fa-phone"></i>
+										</div>
+									</div>
+									<input type="number" id="phone" name="phone" placeholder="Enter Phone Number here"
+										class="form-control" required />
+								</div>
+
+								<!-- EMAIL -->
+
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											@
+										</div>
+									</div>
+									<input type="email" id="email" name="email" placeholder="Enter E-mail here"
+										class="form-control" required />
+								</div>
+
+								<!-- WORK-FIELD -->
+
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<i class="fa fa-briefcase"></i>
+										</div>
+									</div>
+									<input type="text" id="work" name="work" placeholder="Enter work here"
+										class="form-control" required />
+								</div>
+								<!-- contact description -->
+
+								<div class="form-group mt-3">
+
+									<textarea name="description" id="description"
+										placeholder="Enter contact description" class="form-control"
+										rows="3"></textarea>
+
+
+								</div>
+
+								<!-- image -->
+								<div class="custom-file">
+									<input type="file" name="profileImage" />
+								</div>
+
+								<div class="container text-center">
+
+									<button class="btn btn-outline-primary"> Save Contact </button>
+								</div>
+
+
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		
+			<script>
+				$(document).ready(()=>{
+					$(".item").removeClass("active");
+					$("#add-link").addClass("active");
+				});
+			</script>
+
+
+
+		<script src="https://cdn.tiny.cloud/1/5g8kzgk5wqqtxbcsa9557kkyi62kg9ecpkaiwke1x1f3m2bd/tinymce/6/tinymce.min.js"
+			referrerpolicy="origin"></script>
+
+		<script>
+			tinymce.init({
+				selector: 'textarea',
+				plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+				toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+				tinycomments_mode: 'embedded',
+				tinycomments_author: 'Author name',
+				mergetags_list: [
+					{value: 'First.Name', title: 'First Name'},
+					{value: 'Email', title: 'Email'},
+				],
+				ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+			});
+		</script>
+	</section>
+</body>
+
+</html>
